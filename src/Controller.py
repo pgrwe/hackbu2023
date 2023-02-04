@@ -1,4 +1,6 @@
-import pygame, sys
+import pygame, sys, os
+from pygame import *
+
 
 
 class Controller:
@@ -10,7 +12,7 @@ class Controller:
         """
         pygame.init()
         self.window_width = 1000
-        self.window_height = 800
+        self.window_height = 700
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
@@ -18,9 +20,9 @@ class Controller:
 
         while True:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            screen.fill(black)
+            self.screen.fill("white")
             pygame.time.delay(100)
             pygame.display.flip()
