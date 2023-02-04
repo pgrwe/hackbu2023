@@ -16,7 +16,7 @@ class Controller:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
-        pygame.key.set_repeat(50, 500)
+        pygame.key.set_repeat(10, 50)
         self.state = "GAME"
 
         self.player = Player.Player()
@@ -49,3 +49,12 @@ class Controller:
             pygame.display.flip()
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
+        clock.tick(60)
+
+    def create_level(self):
+        """
+        description: creates the level
+        args: (None)
+        return: (None)
+        """
+        
