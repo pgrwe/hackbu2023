@@ -17,7 +17,7 @@ class Controller:
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
         pygame.key.set_repeat(10, 50)
-        self.state = "GAME"
+        self.state = "TITLE"
 
         self.player = Player.Player()
         self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
@@ -77,21 +77,23 @@ class Controller:
         """
         while self.state == "TITLE":
             pygame.font.init()
+            font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
             title1 = font.render('Cat Valentine', True, (131, 139, 139))
             title2 = font.render('Adventure', True, (131, 139, 139))
             start = font.render('Start', True, (131, 139, 139))
             exit = font.render('Exit', True, (131, 139, 139))
 
-            button_start = pygame.Rect((25, 155), (150, 40))
-            button_exit = pygame.Rect((25, 235), (150, 40))
+            button_start = pygame.Rect((25, 190), (150, 40))
+            button_exit = pygame.Rect((25, 350), (150, 40))
 
             self.screen.blit(title1, (20, 10))
             self.screen.blit(title2, (40, 75))
-            self.screen.blit(start, (40, 150))
-            self.screen.blit(exit, (40, 175))
 
-            self.screen.blit(self.button, (25, 160))
-            self.screen.blit(self.button, (25, 208))
+            self.screen.blit(self.button, (25, 155))
+            self.screen.blit(self.button, (25, 350))
+
+            self.screen.blit(start, (40, 200))
+            self.screen.blit(exit, (70, 350))
 
             click = False
             mx, my = pygame.mouse.get_pos()
@@ -102,11 +104,11 @@ class Controller:
                     if event.button == 1:
                         click = True
 
-            if button_NG.collidepoint((mx, my)):
+            if button_start.collidepoint((mx, my)):
                 if click:
                     self.state = "GAME"
 
-            if button_Exit.collidepoint((mx, my)):
+            if button_exit.collidepoint((mx, my)):
                 if click:
                     self.exitGame()
 
@@ -126,5 +128,4 @@ class Controller:
         return: None
         """
         pygame.quit()
-        sys.exit
-        pygame.display.update()
+        sys.exit()
