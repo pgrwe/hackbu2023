@@ -12,8 +12,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 500
         self.rect.y = 350
+        self.direction = "U"
+        self.name = "Val"
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(10,20))
-        self.speed = 3
+        self.speed = 15
 
     def move(self, direction = None):
         """

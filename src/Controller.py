@@ -3,8 +3,6 @@ from src import Player
 from src import Enemy
 from pygame import *
 
-
-
 class Controller:
     def __init__(self):
         """
@@ -25,14 +23,6 @@ class Controller:
         self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
         self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
 
-        # while True:
-        #     for event in pygame.event.get():
-        #         if event.type == pygame.QUIT:
-        #             pygame.quit()
-        #             sys.exit()
-        #     self.screen.fill("white")
-        #     pygame.time.delay(100)
-        #     pygame.display.flip()
 
     def gameLoop(self):
         """
@@ -41,19 +31,21 @@ class Controller:
         return: (None)
         """
         while self.state == "GAME":
-          for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-              sys.exit()
-            if event.type == pygame.KEYDOWN:
-              if (event.key == pygame.K_UP):
-                self.player.move("U")
-              elif (event.key == pygame.K_DOWN):
-                self.player.move("D")
-              elif (event.key == pygame.K_LEFT):
-                self.player.move("L")
-              elif (event.key == pygame.K_RIGHT):
-                self.player.move("R")
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if (event.key == pygame.K_UP):
+                        self.player.move("U")
+                    elif (event.key == pygame.K_DOWN):
+                        self.player.move("D")
+                    elif (event.key == pygame.K_LEFT):
+                        self.player.move("L")
+                    elif (event.key == pygame.K_RIGHT):
+                        self.player.move("R")
 
-            self.player.move()
+                self.player.move()
+            self.all_sprites.draw(self.screen)
+            pygame.display.flip()
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
