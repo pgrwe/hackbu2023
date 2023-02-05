@@ -18,7 +18,7 @@ class Controller:
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
         pygame.key.set_repeat(10, 50) # movement speed repetition
-        self.state = "GAME" # game state
+        self.state = "TITLE" # game state
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("Ghosty", 700, 350,) # init Enemy class from Enemy files
@@ -30,30 +30,19 @@ class Controller:
         self.imgSnowLeftcorner = pygame.image.load("assets/cobbleSnowleft.png").convert_alpha()
         self.imgSkyblock = pygame.image.load("assets/skyblock.png")
 
-        # self.imgSnowmain = pygame.transform.scale(self.imgSnowmain,(90,90))
-        # self.imgSnowbedrock = pygame.transform.scale(self.imgSnowbedrock,(90,90))
-        # self.imgSnowcorner = pygame.transform.scale(self.imgSnowcorner,(90,90))
-        # self.imgSkyblock = pygame.transform.scale(self.imgSkyblock,(90,90))
-
-
-        #self.scrollval = 0
         pygame.key.set_repeat(10, 50)
-        self.state = "TITLE"
 
-        # self.player = Player.Player()
-        # self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
-        # self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
 
         self.buttonimg = pygame.image.load("assets/redButton.png")
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
-        self.screen.blit(self.player.image, self.player.rect)
+        # self.screen.blit(self.player.image, self.player.rect)
 
         self.cat1_img = pygame.image.load("assets/catval.png")
-        self.cat1 = pygame.transform.scale(self.cat1_img, (50, 50))
+        self.cat1 = pygame.transform.scale(self.cat1_img, (64, 64))
         self.cat2_img = pygame.image.load("assets/catval.png")
-        self.cat2 = pygame.transform.scale(self.cat2_img, (50, 50))
+        self.cat2 = pygame.transform.scale(self.cat2_img, (64, 64))
         self.cat3_img = pygame.image.load("assets/catval.png")
-        self.cat3 = pygame.transform.scale(self.cat3_img, (50, 50))
+        self.cat3 = pygame.transform.scale(self.cat3_img, (64, 64))
 
     def mainLoop(self):
         """
