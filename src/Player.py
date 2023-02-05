@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
         self.speed = 15
         self.lives = 9
-        self.attack = False
+        self.fight = False
         self.weapon = "CLAW"
         # self.attack_aniClaw_R = pygame.image.load("rightCLAW"),pygame.image.load("animation two")]
         # self.attack_aniClaw_L = [pygame.image.load("leftCLAW"), pygame.image.load("animation 2 left")]
