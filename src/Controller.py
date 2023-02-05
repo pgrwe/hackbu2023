@@ -73,6 +73,8 @@ class Controller:
         return: (None)
         """
         while self.state == "GAME":
+            if self.player.lives == 0:
+                self.state == "GAMEOVER"
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -85,6 +87,9 @@ class Controller:
                         self.player.move("L")
                     elif (event.key == pygame.K_RIGHT):
                         self.player.move("R")
+                    elif (event.key == pygame.K_x):
+                        self.player.attacking = True
+                        self.player.attack()
 
                 self.player.move()
                 self.create_level()
@@ -92,6 +97,14 @@ class Controller:
             pygame.display.flip()
             #self.screen.fill("black")
             self.player.collide(self.player.rect, self.enemy.rect)
+            if self.player.fight == True:
+                if self.player.attacking == True:
+                    if self.enemy.name == "RAT":
+                        if self.player.weapon == "CLAW":
+                            self.enemy.health = 5
+                        elif self.player.weapon == "SABER":
+                            self.enemy.health = 0
+
             for i in self.tileRects:
                 if self.player.levelcollide(i, self.player.rect):
                     print("working")

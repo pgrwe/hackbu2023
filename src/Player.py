@@ -21,8 +21,12 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
         self.speed = 15
         self.lives = 9
-        self.attack_ani_R = [pygame.image.load("animationright"),pygame.image.load("animation two")]
-        self.attack_ani_L = [pygame.image.load(animationLEft), pygame.image.load("animation 2 left")]
+        self.attack = False
+        self.weapon = "CLAW"
+        # self.attack_aniClaw_R = pygame.image.load("rightCLAW"),pygame.image.load("animation two")]
+        # self.attack_aniClaw_L = [pygame.image.load("leftCLAW"), pygame.image.load("animation 2 left")]
+        # self.attack_aniSaber_R = pygame.image.load("rightSABER"),pygame.image.load("animation two")]
+        # self.attack_aniSaber_L = [pygame.image.load("leftSABER"), pygame.image.load("animation 2 left")]
         self.attacking = False
         self.attack_frame = 0
 
@@ -61,17 +65,25 @@ class Player(pygame.sprite.Sprite):
             self.attack_frame = 0
             self.attacking = False
 
-        if self.direction == "R":
-            self.image = self.attack_ani_R[self.attack_frame]
-        else:
-            self.image = self.attack_ani_L[self.attack_frame]
 
+        if self.direction == "R":
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_R[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_R[self.attack_frame]
+        else:
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_L[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_L[self.attack_frame]
         self.attack_frame += 1
+
         if self.attacking == False:
             self.move()
 
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
+          self.fight = True
           if self.direction == "R":
             #player loses a life
             self.lives -= 1
