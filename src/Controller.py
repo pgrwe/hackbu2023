@@ -1,8 +1,8 @@
 import pygame, sys, os
 from src import Player
 from src import Enemy
+from src import Tiles
 from pygame import *
-# from src import CONSTANTS
 
 class Controller:
     def __init__(self):
@@ -26,7 +26,8 @@ class Controller:
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
-        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
+        #self.tiles = Tiles.Tile()
+        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy),(self.tiles)) # group of all sprites
 
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
         self.imgSnowbedrock = pygame.image.load("assets/cobbleSnowBedrock.png").convert_alpha()
@@ -75,6 +76,7 @@ class Controller:
         while self.state == "GAME":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print(self.tileRects)
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_UP):
@@ -85,6 +87,7 @@ class Controller:
                         self.player.move("L")
                     elif (event.key == pygame.K_RIGHT):
                         self.player.move("R")
+                        
 
                 self.player.move()
                 self.create_level()
@@ -98,6 +101,7 @@ class Controller:
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
         clock.tick(60)
+        
 
     def create_level(self):
         """
@@ -115,20 +119,40 @@ class Controller:
                     ['2','2','2','1','2','2','2','2','2','2','2'],
                     ['2','2','2','2','2','2','2','2','2','2','2']]
         tileSize = 90
-        for y in range(len(gameMap)):
-            for x in range(len(gameMap[y])):
-                if gameMap[y][x] == "1":
-                    self.temp = self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
-                elif gameMap[y][x] == "2":
-                    self.temp = self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
-                elif gameMap[y][x] == "3":
-                    self.temp = self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
-                elif gameMap[y][x] == "4":
-                    self.temp = self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
-                elif gameMap[y][x] == "0":
-                    self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
-                if gameMap[y][x] != "0":
-                    self.tileRects.append(pygame.Rect(self.temp))
+        # for y in range(len(gameMap)):
+            # for x in range(len(gameMap[y])):
+                # if gameMap[y][x] == "1":
+                    # self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
+                    
+                # elif gameMap[y][x] == "2":
+                    # self.temp2 = self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
+                    # self.tileRects.append(pygame.Rect(self.temp2))
+                # elif gameMap[y][x] == "3":
+                    # self.temp3 = self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
+                    # self.tileRects.append(pygame.Rect(self.temp3))
+                # elif gameMap[y][x] == "4":
+                    # self.temp4 = self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
+                    # self.tileRects.append(pygame.Rect(self.temp4))
+                # elif gameMap[y][x] == "0":
+                    # self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
+            
+        self.tileGroup = pygame.sprite.Group()
+        for row_index,row in enumerate(gameMap):
+            for col_index,column in enumerate(row):
+                x = col_index * tile_size
+                y = row_index * tile_size
+                if column == '1':
+                    tile = Tiles.Tile((x,y),tile_size)
+                    self.tiles.add(tile)        
+                    
+                    
+        
+                    
+                """
+                TO-DO: make the blits here sprites (if possible) to smooth collisions
+                Add moving camera/larger level
+                Remember that level size scales with window size (vertically), if you make the blocks smaller you will need to change around the window size and number of rows/columns
+                """
 
     def title(self):
         """

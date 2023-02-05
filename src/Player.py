@@ -21,10 +21,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
         self.speed = 15
         self.lives = 9
-        self.attack_ani_R = [pygame.image.load("animationright"),pygame.image.load("animation two")]
-        self.attack_ani_L = [pygame.image.load(animationLEft), pygame.image.load("animation 2 left")]
-        self.attacking = False
-        self.attack_frame = 0
+        # self.attack_ani_R = [pygame.image.load("animationright"),pygame.image.load("animation two")]
+        # self.attack_ani_L = [pygame.image.load(animationLEft), pygame.image.load("animation 2 left")]
+        # self.attacking = False
+        # self.attack_frame = 0
 
 
     def move(self, direction = None):
@@ -51,24 +51,24 @@ class Player(pygame.sprite.Sprite):
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
 
-    def attack(self):
-        """
-        description: makes the character attack with an animation. also states how much damage it is able to do while also taking damage too.
-        args: none.
-        return: none.
-        """
-        if self.attack_frame > 1:
-            self.attack_frame = 0
-            self.attacking = False
+    # def attack(self):
+        # """
+        # description: makes the character attack with an animation. also states how much damage it is able to do while also taking damage too.
+        # args: none.
+        # return: none.
+        # """
+        # if self.attack_frame > 1:
+            # self.attack_frame = 0
+            # self.attacking = False
 
-        if self.direction == "R":
-            self.image = self.attack_ani_R[self.attack_frame]
-        else:
-            self.image = self.attack_ani_L[self.attack_frame]
+        # if self.direction == "R":
+            # self.image = self.attack_ani_R[self.attack_frame]
+        # else:
+            # self.image = self.attack_ani_L[self.attack_frame]
 
-        self.attack_frame += 1
-        if self.attacking == False:
-            self.move()
+        # self.attack_frame += 1
+        # if self.attacking == False:
+            # self.move()
 
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
