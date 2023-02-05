@@ -20,8 +20,12 @@ class Controller:
         pygame.key.set_repeat(10, 50) # movement speed repetition
         self.state = "TITLE" # game state
 
+        self.cat2path = ("assets/cat2.png")
+
         self.player = Player.Player() # init Player class from Player file
-        self.enemy = Enemy.Enemy("Ghosty", 700, 350,) # init Enemy class from Enemy files
+        self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
+        self.player.img = pygame.image.load(self.cat2path).convert_alpha()
+        self.player.image =pygame.transform.scale(self.player.img, (100, 100))
         self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
 
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
@@ -71,7 +75,6 @@ class Controller:
         while self.state == "GAME":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    print(self.temp)
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_UP):
@@ -198,7 +201,7 @@ class Controller:
                         if input_box.collidepoint(event.pos):
                             color = color_active
                     if color == color_active:
-                        if event.type == pygame.KEYDOWN:
+                        if event.type == pygame.KEYUP:
                             if event.key == pygame.K_BACKSPACE:
                                 text = text[:-1]
                             elif event.key == pygame.K_RETURN:
@@ -221,14 +224,6 @@ class Controller:
                     break
 
             while cha_choice == True:
-                print("HERE YOU CHOOSE YOUR CAT")
-
-    # def collision(self):
-    #     if  pygame.Rect.colliderect(self.player.rect, self.enemy.rect) == True:
-    #         #player loses a life
-    #         self.player.lives -= 1
-    #         self.rect.x -= 3*self.speed
-    #         print("Ouch")
 
                 cat_1 = pygame.Rect((25, 190), (50, 40))
                 cat_2 = pygame.Rect((125, 190), (50, 40))
