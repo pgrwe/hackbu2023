@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         # self.rect.center = 500,350
         self.rect.x = 0
-        self.rect.y = 450 #440 number where platform starts on right side
+        self.rect.y = 0 #440 number where platform starts on right side
         self.direction = "U"
         self.name = "Val"
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,90))
@@ -40,12 +40,12 @@ class Player(pygame.sprite.Sprite):
         args: direction
         return: None
         """
-        if direction == "U":
-            self.direction = "U"
-            self.y_vel = -1
-            self.jump = True
-            # self.image = pygame.image.load(self.image)
-            self.rect.y -= self.speed
+        # if direction == "U":
+        #     self.direction = "U"
+        #     self.y_vel = -1
+        #     self.jump = True
+        #     # self.image = pygame.image.load(self.image)
+        #     self.rect.y -= self.speed
 
 
 
@@ -54,67 +54,68 @@ class Player(pygame.sprite.Sprite):
         #    self.y_vel += .5
         #    if self.y_vel > 2:
         #       self.y_vel = 2
-<<<<<<< HEAD
+
         #self.rect.y += self.y_vel
 
+        if direction == "U":
+            for i in range(200):
+                self.rect.y -= 0.05
+            for i in range(200):
+                self.rect.y += 0.5
 
+        #self.rect.y += self.y_vel
 
-=======
-        #self.rect.y += self.y_vel       
->>>>>>> 10553503f5781eb9466cb72491106d300728c5fe
-        if direction == "D":
+        elif direction == "D":
           self.direction = "D"
           # self.image = pygame.image.load(self.image)
           # self.image = pygame.image.load("assets/cat.png")
           self.rect.y += self.speed
-        if direction == "L":
+        elif direction == "L":
           self.direction = "L"
           self.rect.x -= self.speed
           # self.image = pygame.image.load(self.image)
-        if direction == "R":
+        elif direction == "R":
           self.direction = "R"
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
 
-    # def attack(self):
-        # """
-        # description: makes the character attack with an animation. also states how much damage it is able to do while also taking damage too.
-        # args: none.
-        # return: none.
-        # """
-        # if self.attack_frame > 1:
-            # self.attack_frame = 0
-            # self.attacking = False
-        # if self.direction == "R":
-            # self.image = self.attack_ani_R[self.attack_frame]
-        # else:
-            # self.image = self.attack_ani_L[self.attack_frame]
+    def attack(self):
+        """
+        description: makes the character attack with an animation. also states how much damage it is able to do while also taking damage too.
+        args: none.
+        return: none.
+        """
+        if self.attack_frame > 1:
+            self.attack_frame = 0
+            self.attacking = False
+        if self.direction == "R":
+            self.image = self.attack_ani_R[self.attack_frame]
+        else:
+            self.image = self.attack_ani_L[self.attack_frame]
 
-        # self.attack_frame += 1
-        # if self.attacking == False:
-            # self.move()
-
-        # if self.direction == "R":
-            # if self.weapon == "CLAW":
-                # self.image = self.attack_aniClaw_R[self.attack_frame]
-            # elif self.weapon == "SABER":
-                # self.image = self.attack_aniSaber_R[self.attack_frame]
-        # else:
-            # if self.weapon == "CLAW":
-                # self.image = self.attack_aniClaw_L[self.attack_frame]
-            # elif self.weapon == "SABER":
-                # self.image = self.attack_aniSaber_L[self.attack_frame]
-        # self.attack_frame += 1
-
-<<<<<<< HEAD
+        self.attack_frame += 1
         if self.attacking == False:
             self.move()
 
-=======
+        if self.direction == "R":
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_R[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_R[self.attack_frame]
+        else:
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_L[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_L[self.attack_frame]
+        self.attack_frame += 1
+
+        if self.attacking == False:
+            self.move()
+
         # if self.attacking == False:
             # self.move()
-      
->>>>>>> 10553503f5781eb9466cb72491106d300728c5fe
+
+
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
           self.fight = True

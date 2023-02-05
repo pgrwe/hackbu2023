@@ -120,9 +120,6 @@ class Controller:
                     print("working")
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
-        clock.tick(60)
-
-
 
 
     def create_level(self):
@@ -175,6 +172,7 @@ class Controller:
                 if column != '0':
                     tile = Tiles.Tile((x,y), tileSize)
                     self.tileGroup.add(tile)
+        self.tileGroup.draw(self.screen)
     def title(self):
         """
         description: Sets up title screen with it text, buttons, and images.
@@ -235,16 +233,17 @@ class Controller:
         args: None
         return: None
         """
-        self.screen.fill("black")
         while self.state == "CHOICE":
-            input_box = pygame.Rect((310, 10), (25, 28))
-            inside_box = pygame.Rect((313, 10), (500, 32))
-            font = pygame.font.Font('assets/Blantick_Script.ttf', 40)
+            self.screen.fill((255,141,133))
+            input_box = pygame.Rect((540, 212), (25, 65))
+            inside_box = pygame.Rect((543, 212), (500, 75))
+            font2 = pygame.font.Font("assets/Blantick_Script.ttf", 80)
+            font = pygame.font.Font('assets/Blantick_Script.ttf', 55)
+            color_active = pygame.Color((250, 222, 220))
             color_inactive = pygame.Color('red')
-            color_active = pygame.Color('darkorchid3')
             color = color_inactive
-            text1 = font.render('Enter Name:', True, (250, 0, 0))
-            self.screen.blit(text1, (100, 10))
+            text1 = font.render('Enter Name:', True, (255, 0, 0))
+            self.screen.blit(text1, (300, 200))
             text = ""
             writing = True
             cha_choice = False
@@ -261,7 +260,7 @@ class Controller:
                             if event.key == pygame.K_BACKSPACE:
                                 text = text[:-1]
                             elif event.key == pygame.K_RETURN:
-                                self.screen.fill((0, 0, 0))
+                                self.screen.fill((255,141,133))
                                 writing = False
                             else:
                                 text += event.unicode
@@ -270,8 +269,8 @@ class Controller:
                 txt_surface = font.render(text, True, color)
                 width = max(150, txt_surface.get_width() + 10)
                 input_box.w = width
-                pygame.draw.rect(self.screen, (0,0,0), inside_box)
-                self.screen.blit(txt_surface, (input_box.x + 5, input_box.y - 5))
+                pygame.draw.rect(self.screen, (255,141,133), inside_box)
+                self.screen.blit(txt_surface, (input_box.x + 5, input_box.y))
                 pygame.draw.rect(self.screen, color , input_box, 2)
                 # pygame.display.update()
                 pygame.display.flip()
@@ -280,6 +279,14 @@ class Controller:
                     break
 
             while cha_choice == True:
+                self.screen.fill((255,141,133))
+                name = font2.render('Name:', True, (255, 0, 0))
+                chosen_name = font2.render(self.player.name, True, (255, 0, 0))
+                catchoice = font.render("Choose a cat", True, (250, 222, 220))
+
+                self.screen.blit(name, (300, 200))
+                self.screen.blit(chosen_name, (500, 200))
+                self.screen.blit(catchoice, (370, 600))
 
                 cat_1 = pygame.Rect((50, 190), (250, 250))
                 cat_2 = pygame.Rect((350, 190), (250, 250))
@@ -292,6 +299,9 @@ class Controller:
                 click = False
                 mx, my = pygame.mouse.get_pos()
                 for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
                     event.type == pygame.mouse.get_pressed()
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if event.button == 1:
@@ -321,12 +331,12 @@ class Controller:
     #     while self.state == "WIN":
     #
     def gameOver(self):
-        self.screen.fill("black")
         while self.state == "GAMEOVER":
+            self.screen.fill((255,141,133))
             pygame.font.init()
             font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
-            retry = font.render('Retry', True, (131, 139, 139))
-            exit = font.render('Quit', True, (131, 139, 139))
+            retry = font.render('Retry', True, (250, 222, 220))
+            exit = font.render('Quit', True, (250, 222, 220))
 
             button_retry = pygame.Rect((25, 190), (150, 40))
             button_exit = pygame.Rect((25, 350), (150, 40))
