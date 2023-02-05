@@ -37,6 +37,8 @@ class Controller:
                 self.gameLoop()
             elif (self.state == "TITLE"):
                 self.title()
+            elif (self.state == "CHOICE"):
+                self.choice()
             # elif (self.state == "WIN"):
             #     self.win()
             # elif (self.state == "GAMEOVER"):
@@ -114,6 +116,61 @@ class Controller:
 
             pygame.display.update()
 
+    def choice(self):
+        """
+        description: Allows type in name and choose cat
+        args: None
+        return: None
+        """
+        input_box = pygame.Rect((310, 10), (25, 28))
+        inside_box = pygame.Rect((313, 10), (200, 32))
+        font = pygame.font.Font('assets/Basking.ttf', 20)
+        color_inactive = pygame.Color('darkorchid4')
+        color_active = pygame.Color('darkorchid3')
+        color = color_inactive
+        text1 = font.render('Enter Name:', True, (154, 50, 205))
+        self.screen.blit(text1, (200, 10))
+        text = ""
+        active = False
+        done = False
+        pygame.display.update()
+
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if input_box.collidepoint(event.pos):
+                        active = not active
+                    else:
+                        active = False
+                        color = color_active
+                    if active:
+                        color = color_active
+                    else:
+                        color = color_inactive
+                if event.type == pygame.KEYDOWN:
+                    if active:
+                        if event.key == pygame.K_BACKSPACE:
+                            text = text[:-1]
+                        elif event.key == pygame.K_RETURN:
+                            text = ""
+                            self.state == "GAME"
+                            self.screen.fill((0, 0, 0))
+                            done = True
+                        else:
+                            text += event.unicode
+                            self.player.name = text
+        color2 = (0,0,0)
+        txt_surface = font.render(text, True, color)
+        width = max(150, txt_surface.get_width() + 10)
+        input_box.w = width
+        pygame.draw.rect(self.screen, color2, inside_box)
+        self.screen.blit(txt_surface, (input_box.x + 5, input_box.y + 2))
+        pygame.draw.rect(self.screen, color , input_box, 2)
+
+
+        pygame.display.flip()
     #
     # def win(self):
     #     while self.state == "WIN":
