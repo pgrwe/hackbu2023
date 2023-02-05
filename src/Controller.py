@@ -26,6 +26,7 @@ class Controller:
         self.catsoulpath = ("assets/catsoul.png")
         self.heartpath  = ('assets/heart.png')
         self.wintertreepath = ("assets/wintertree.png")
+        self.ratKingpath = ("assets/ratKing.png")
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
@@ -54,6 +55,8 @@ class Controller:
         self.catsoul = pygame.transform.scale(self.catsoul_img, (250, 250))
         self.heart_img = pygame.image.load(self.heartpath)
         self.heart = pygame.transform.scale(self.heart_img, (64, 64))
+        self.ratKing_img = pygame.image.load(self.ratKingpath)
+        self.ratKing = pygame.transform.scale(self.ratKing_img, (64, 64))
 
     def mainLoop(self):
         """
@@ -334,18 +337,21 @@ class Controller:
         while self.state == "GAMEOVER":
             self.screen.fill((255,141,133))
             pygame.font.init()
-            font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
+            font = pygame.font.Font("assets/Blantick_Script.ttf", 55)
+            font2 = pygame.font.Font("assets/Blantick_Script.ttf", 80)
+            gameover = font2.render("Game Over", True, (255, 0, 0))
             retry = font.render('Retry', True, (250, 222, 220))
             exit = font.render('Quit', True, (250, 222, 220))
 
-            button_retry = pygame.Rect((25, 190), (150, 40))
-            button_exit = pygame.Rect((25, 350), (150, 40))
+            button_retry = pygame.Rect((420, 190), (150, 40))
+            button_exit = pygame.Rect((420, 350), (150, 40))
 
-            self.screen.blit(self.button, (25, 155))
-            self.screen.blit(self.button, (25, 350))
+            self.screen.blit(self.button, (420, 200))
+            self.screen.blit(self.button, (420, 340))
 
-            self.screen.blit(retry, (40, 200))
-            self.screen.blit(exit, (70, 350))
+            self.screen.blit(retry, (440, 200))
+            self.screen.blit(exit, (460, 345))
+            self.screen.blit(gameover, (375, 75))
 
             click = False
             mx, my = pygame.mouse.get_pos()
@@ -358,6 +364,7 @@ class Controller:
 
             if button_retry.collidepoint((mx, my)):
                 if click:
+                    self.lives = 9
                     self.state = "TITLE"
 
             if button_exit.collidepoint((mx, my)):

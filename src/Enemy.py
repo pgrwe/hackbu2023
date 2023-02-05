@@ -8,7 +8,7 @@ class Enemy(pygame.sprite.Sprite):
         return: None
         """
         pygame.sprite.Sprite.__init__(self)
-        # self.image = pygame.image.load("assets/rat.png").convert_alpha()
+        self.image = pygame.image.load("assets/ratKing.png").convert_alpha()
         self.image = pygame.Surface([10,20])
         self.image.fill("blue")
 
