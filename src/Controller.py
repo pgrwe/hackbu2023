@@ -103,8 +103,9 @@ class Controller:
 
                 self.player.move()
                 self.create_level()
-            self.all_sprites.draw(self.screen)
-            pygame.display.flip()
+                self.all_sprites.draw(self.screen)
+                pygame.display.flip()
+
             #self.screen.fill("black")
             self.player.collide(self.player.rect, self.enemy.rect)
             # if self.player.fight == True:
@@ -121,6 +122,7 @@ class Controller:
             for i in self.tileRects:
                 if self.player.levelcollide(i, self.player.rect):
                     print("working")
+            self.create_level()
             self.all_sprites.draw(self.screen)
             pygame.display.flip()
 

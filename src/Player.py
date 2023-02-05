@@ -14,9 +14,9 @@ class Player(pygame.sprite.Sprite):
         self.img = pygame.image.load(self.imagepath).convert_alpha()
         self.image =pygame.transform.scale(self.img, (100, 100))
         self.rect = self.image.get_rect()
-        self.rect.center = 500,350
-        #self.rect.x = 0
-        #self.rect.y = 440 #440 number where platform starts on right side
+        # self.rect.center = 500,350
+        self.rect.x = 0
+        self.rect.y = 450 #440 number where platform starts on right side
         self.direction = "U"
         self.name = "Val"
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(90,90))
@@ -46,9 +46,9 @@ class Player(pygame.sprite.Sprite):
             self.jump = True
             # self.image = pygame.image.load(self.image)
             self.rect.y -= self.speed
-            
-               
-        
+
+
+
         # if direction == "None":
         #    self.jump = False
         #    self.y_vel += .5
@@ -56,8 +56,8 @@ class Player(pygame.sprite.Sprite):
         #       self.y_vel = 2
         #self.rect.y += self.y_vel
 
-        
-        
+
+
         if direction == "D":
           self.direction = "D"
           # self.image = pygame.image.load(self.image)
@@ -97,7 +97,7 @@ class Player(pygame.sprite.Sprite):
 
         if self.attacking == False:
             self.move()
-      
+
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
           self.fight = True
