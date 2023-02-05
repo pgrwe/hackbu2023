@@ -1,7 +1,7 @@
 import pygame, sys, os
 from src import Player
 from src import Enemy
-from src import Tiles
+from src import Tile
 from pygame import *
 
 class Controller:
@@ -26,8 +26,7 @@ class Controller:
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
-        #self.tiles = Tiles.Tile()
-        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy),(self.tiles)) # group of all sprites
+        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
 
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
         self.imgSnowbedrock = pygame.image.load("assets/cobbleSnowBedrock.png").convert_alpha()
@@ -73,6 +72,7 @@ class Controller:
         args: (None)
         return: (None)
         """
+        self.screen.fill((0,0,0))
         while self.state == "GAME":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -86,21 +86,19 @@ class Controller:
                     elif (event.key == pygame.K_LEFT):
                         self.player.move("L")
                     elif (event.key == pygame.K_RIGHT):
-                        self.player.move("R")
-                        
-
+                        self.player.move("R")                                      
                 self.player.move()
                 self.create_level()
-            self.all_sprites.draw(self.screen)
-            pygame.display.flip()
-            #self.screen.fill("black")
-            self.player.collide(self.player.rect, self.enemy.rect)
-            for i in self.tileRects:
-                if self.player.levelcollide(i, self.player.rect):
-                    print("working")
+                self.tileGroup.draw(self.screen)      
+                self.all_sprites.draw(self.screen)
+                pygame.display.flip()
+                #self.screen.fill("black")
+                self.player.collide(self.player.rect, self.enemy.rect)
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
+        print(self.tileGroup + "test: ")
         clock.tick(60)
+        
         
 
     def create_level(self):
@@ -109,15 +107,15 @@ class Controller:
         args: (None)
         return: (None)
         """
-        gameMap =  [['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','4','1','1','1'],
-                    ['1','1','3','0','4','1','1','2','2','2','2'],
-                    ['2','2','2','1','2','2','2','2','2','2','2'],
-                    ['2','2','2','2','2','2','2','2','2','2','2']]
+        gameMap =  ['0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','4','1','1','1',
+                    '1','1','3','0','4','1','1','2','2','2','2',
+                    '2','2','2','1','2','2','2','2','2','2','2',
+                    '2','2','2','2','2','2','2','2','2','2','2']
         tileSize = 90
         # for y in range(len(gameMap)):
             # for x in range(len(gameMap[y])):
@@ -139,11 +137,11 @@ class Controller:
         self.tileGroup = pygame.sprite.Group()
         for row_index,row in enumerate(gameMap):
             for col_index,column in enumerate(row):
-                x = col_index * tile_size
-                y = row_index * tile_size
-                if column == '1':
-                    tile = Tiles.Tile((x,y),tile_size)
-                    self.tiles.add(tile)        
+                x = col_index * tileSize
+                y = row_index * tileSize
+                if column != '0':
+                    tile = Tile.Tiles((x,y), tileSize)
+                    self.tileGroup.add(tile)                        
                     
                     
         
@@ -153,6 +151,7 @@ class Controller:
                 Add moving camera/larger level
                 Remember that level size scales with window size (vertically), if you make the blocks smaller you will need to change around the window size and number of rows/columns
                 """
+          
 
     def title(self):
         """
