@@ -86,6 +86,7 @@ class Controller:
                     elif (event.key == pygame.K_RIGHT):
                         self.player.move("R")
 
+                
                 self.player.move()
                 self.create_level()
             self.all_sprites.draw(self.screen)
