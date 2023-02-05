@@ -65,11 +65,11 @@ class Player(pygame.sprite.Sprite):
 
         #self.rect.y += self.y_vel
 
-        elif direction == "D":
-          self.direction = "D"
+        # elif direction == "D":
+          # self.direction = "D"
           # self.image = pygame.image.load(self.image)
           # self.image = pygame.image.load("assets/cat.png")
-          self.rect.y += self.speed
+          # self.rect.y += self.speed
         elif direction == "L":
           self.direction = "L"
           self.rect.x -= self.speed
@@ -78,6 +78,12 @@ class Player(pygame.sprite.Sprite):
           self.direction = "R"
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
+          
+        elif direction == "grav":
+            self.y_vel += .8
+            if self.y_vel > 2:
+                self.y_vel = 2
+        self.rect.y += self.y_vel
 
     def attack(self):
         """
@@ -135,6 +141,7 @@ class Player(pygame.sprite.Sprite):
              print("Ouch", self.lives)
 
 
-    def levelcollide(self, level, player):
-          if pygame.Rect.colliderect(level, player):
-            self.rect.y -= 1
+    def levelcollide(self, level):
+        for tile in level:
+            if tile.colliderect(self.rect):
+                self.y_vel = 0		
