@@ -24,15 +24,16 @@ class Controller:
         self.enemy = Enemy.Enemy("Ghosty", 700, 350,) # init Enemy class from Enemy files
         self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites 
         
-        self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad-PNG.png").convert_alpha()
-        self.imgSnowbedrock = pygame.image.load("assets/cobbleSnowBedrock-PNG.png").convert_alpha()
-        self.imgSnowcorner =  pygame.image.load("assets/cobbleSnowBedrock.psd.png").convert_alpha()
+        self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
+        self.imgSnowbedrock = pygame.image.load("assets/cobbleSnowBedrock.png").convert_alpha()
+        self.imgSnowRightcorner =  pygame.image.load("assets/cobbleSnowright.png").convert_alpha()
+        self.imgSnowLeftcorner = pygame.image.load("assets/cobbleSnowleft.png").convert_alpha()
         self.imgSkyblock = pygame.image.load("assets/skyblock.png")
         
-        self.imgSnowmain = pygame.transform.scale(self.imgSnowmain,(90,90))
-        self.imgSnowbedrock = pygame.transform.scale(self.imgSnowbedrock,(90,90)) 
-        self.imgSnowcorner = pygame.transform.scale(self.imgSnowcorner,(90,90))
-        self.imgSkyblock = pygame.transform.scale(self.imgSkyblock,(90,90))
+        # self.imgSnowmain = pygame.transform.scale(self.imgSnowmain,(90,90))
+        # self.imgSnowbedrock = pygame.transform.scale(self.imgSnowbedrock,(90,90)) 
+        # self.imgSnowcorner = pygame.transform.scale(self.imgSnowcorner,(90,90))
+        # self.imgSkyblock = pygame.transform.scale(self.imgSkyblock,(90,90))
         
        
         #self.scrollval = 0
@@ -105,9 +106,9 @@ class Controller:
                     ['0','0','0','0','0','0','0','0','0','0','0'],
                     ['0','0','0','0','0','0','0','0','0','0','0'],
                     ['0','0','0','0','0','0','0','0','0','0','0'],
-                    ['0','0','0','0','0','0','0','3','1','1','1'],
-                    ['0','0','0','0','3','1','1','2','2','2','2'],
-                    ['1','1','1','1','2','2','2','2','2','2','2'],
+                    ['0','0','0','0','0','0','0','4','1','1','1'],
+                    ['1','1','3','0','4','1','1','2','2','2','2'],
+                    ['2','2','2','1','2','2','2','2','2','2','2'],
                     ['2','2','2','2','2','2','2','2','2','2','2']]
         tileSize = 90
         self.tileRects = []
@@ -118,7 +119,9 @@ class Controller:
                 elif gameMap[y][x] == "2":
                     self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "3":
-                    self.screen.blit(self.imgSnowcorner, (x*tileSize, y*tileSize))
+                    self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
+                elif gameMap[y][x] == "4":
+                    self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "0":
                     self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
                 # if gameMap[x][y] != "0":
