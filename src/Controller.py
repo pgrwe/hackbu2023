@@ -104,6 +104,9 @@ class Controller:
                             self.enemy.health = 5
                         elif self.player.weapon == "SABER":
                             self.enemy.health = 0
+                else:
+                    self.player.lives -= 1
+
 
             for i in self.tileRects:
                 if self.player.levelcollide(i, self.player.rect):
