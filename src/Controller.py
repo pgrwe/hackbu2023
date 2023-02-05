@@ -17,25 +17,25 @@ class Controller:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
-        pygame.key.set_repeat(10, 50) # movement speed repetition 
+        pygame.key.set_repeat(10, 50) # movement speed repetition
         self.state = "GAME" # game state
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("Ghosty", 700, 350,) # init Enemy class from Enemy files
-        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites 
-        
+        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
+
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
         self.imgSnowbedrock = pygame.image.load("assets/cobbleSnowBedrock.png").convert_alpha()
         self.imgSnowRightcorner =  pygame.image.load("assets/cobbleSnowright.png").convert_alpha()
         self.imgSnowLeftcorner = pygame.image.load("assets/cobbleSnowleft.png").convert_alpha()
         self.imgSkyblock = pygame.image.load("assets/skyblock.png")
-        
+
         # self.imgSnowmain = pygame.transform.scale(self.imgSnowmain,(90,90))
-        # self.imgSnowbedrock = pygame.transform.scale(self.imgSnowbedrock,(90,90)) 
+        # self.imgSnowbedrock = pygame.transform.scale(self.imgSnowbedrock,(90,90))
         # self.imgSnowcorner = pygame.transform.scale(self.imgSnowcorner,(90,90))
         # self.imgSkyblock = pygame.transform.scale(self.imgSkyblock,(90,90))
-        
-       
+
+
         #self.scrollval = 0
         pygame.key.set_repeat(10, 50)
         self.state = "TITLE"
@@ -47,6 +47,13 @@ class Controller:
         self.buttonimg = pygame.image.load("assets/redButton.png")
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
         self.screen.blit(self.player.image, self.player.rect)
+
+        self.cat1_img = pygame.image.load("assets/catval.png")
+        self.cat1 = pygame.transform.scale(self.cat1_img, (50, 50))
+        self.cat2_img = pygame.image.load("assets/catval.png")
+        self.cat2 = pygame.transform.scale(self.cat2_img, (50, 50))
+        self.cat3_img = pygame.image.load("assets/catval.png")
+        self.cat3 = pygame.transform.scale(self.cat3_img, (50, 50))
 
     def mainLoop(self):
         """
@@ -262,6 +269,7 @@ class Controller:
                     break
 
             while cha_choice == True:
+<<<<<<< HEAD
                 print("HERE YOU CHOOSE YOUR CAT")
                 cha_choice = False
                 self.state = "GAME"
@@ -273,6 +281,40 @@ class Controller:
     #         self.player.lives -= 1
     #         self.rect.x -= 3*self.speed
     #         print("Ouch")
+=======
+                cat_1 = pygame.Rect((25, 190), (50, 40))
+                cat_2 = pygame.Rect((125, 190), (50, 40))
+                cat_3 = pygame.Rect((225, 190), (50, 40))
+
+                self.screen.blit(self.cat1, (25, 190))
+                self.screen.blit(self.cat2, (125, 190))
+                self.screen.blit(self.cat3, (225, 190))
+
+                click = False
+                mx, my = pygame.mouse.get_pos()
+                for event in pygame.event.get():
+                    event.type == pygame.mouse.get_pressed()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            click = True
+
+                if cat_1.collidepoint((mx, my)):
+                    if click:
+                        cha_choice = False
+                        self.state = "GAME"
+
+                if cat_2.collidepoint((mx, my)):
+                    if click:
+                        cha_choice = False
+                        self.state = "GAME"
+                if cat_3.collidepoint((mx, my)):
+                    if click:
+                        cha_choice = False
+                        self.state = "GAME"
+                pygame.display.update()
+
+    #
+>>>>>>> 836d579c5f6e07b47895a5f2e4da732bef1693ac
     # def win(self):
     #     while self.state == "WIN":
     #
@@ -287,6 +329,7 @@ class Controller:
         """
         pygame.quit()
         sys.exit()
+<<<<<<< HEAD
         
     def collision_test(rect, tiles):
         hitlist = []
@@ -294,3 +337,5 @@ class Controller:
             if rect.colliderect(tile):
                 hitlist.append(tile)
         
+=======
+>>>>>>> 836d579c5f6e07b47895a5f2e4da732bef1693ac
