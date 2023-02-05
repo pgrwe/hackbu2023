@@ -100,7 +100,7 @@ class Controller:
                         self.player.attacking = True
                         self.player.attack()
 
-                
+
                 self.player.move()
                 self.create_level()
             self.all_sprites.draw(self.screen)
@@ -261,13 +261,13 @@ class Controller:
 
             while cha_choice == True:
 
-                cat_1 = pygame.Rect((25, 190), (50, 40))
-                cat_2 = pygame.Rect((125, 190), (50, 40))
-                cat_3 = pygame.Rect((225, 190), (50, 40))
+                cat_1 = pygame.Rect((50, 190), (250, 250))
+                cat_2 = pygame.Rect((350, 190), (250, 250))
+                cat_3 = pygame.Rect((650, 190), (250, 250))
 
-                self.screen.blit(self.cat1, (25, 190))
-                self.screen.blit(self.cat2, (125, 190))
-                self.screen.blit(self.cat3, (225, 190))
+                self.screen.blit(self.cat1, (50, 190))
+                self.screen.blit(self.cat2, (350, 190))
+                self.screen.blit(self.cat3, (650, 190))
 
                 click = False
                 mx, my = pygame.mouse.get_pos()
@@ -306,7 +306,7 @@ class Controller:
             pygame.font.init()
             font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
             retry = font.render('Retry', True, (131, 139, 139))
-            exit = font.render('Exit', True, (131, 139, 139))
+            exit = font.render('Quit', True, (131, 139, 139))
 
             button_retry = pygame.Rect((25, 190), (150, 40))
             button_exit = pygame.Rect((25, 350), (150, 40))
@@ -328,7 +328,7 @@ class Controller:
 
             if button_retry.collidepoint((mx, my)):
                 if click:
-                    self.state = "CHOICE"
+                    self.state = "TITLE"
 
             if button_exit.collidepoint((mx, my)):
                 if click:
