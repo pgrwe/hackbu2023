@@ -39,12 +39,13 @@ class Controller:
         pygame.key.set_repeat(10, 50)
         self.state = "TITLE"
 
-        self.player = Player.Player()
-        self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
-        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
+        # self.player = Player.Player()
+        # self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
+        # self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
 
         self.buttonimg = pygame.image.load("assets/redButton.png")
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
+        self.screen.blit(self.player.image, self.player.rect)
 
     def mainLoop(self):
         """

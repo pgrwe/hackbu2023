@@ -12,17 +12,17 @@ class Player(pygame.sprite.Sprite):
         
         self.image = pygame.image.load(self.imagepath).convert_alpha()
         # self.image = pygame.image.load("assets/cat.png").convert_alpha()
-        self.image = pygame.Surface([10,20])
-        self.image.fill("white")
+        # self.image = pygame.Surface([10,20])
+        # self.image.fill("white")
         
         self.rect = self.image.get_rect()
-        self.rect.x = 500
-        self.rect.y = 350
+        self.rect.center = 500,350
         self.direction = "U"
         self.name = "Val"
-        self.rect = pygame.Rect((self.rect.x,self.rect.y),(10,20))
+        self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
         self.speed = 15
         self.lives = 9
+        
 
     def move(self, direction = None):
         """
