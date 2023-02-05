@@ -63,8 +63,8 @@ class Controller:
                 self.choice()
             # elif (self.state == "WIN"):
             #     self.win()
-            # elif (self.state == "GAMEOVER"):
-            #     self.gameOver()
+            elif (self.state == "GAMEOVER"):
+                self.gameOver()
 
     def gameLoop(self):
         """
@@ -74,7 +74,9 @@ class Controller:
         """
         while self.state == "GAME":
             if self.player.lives == 0:
-                self.state == "GAMEOVER"
+                self.state = "GAMEOVER"
+                # print(self.player.lives, self.state)
+                break
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -97,23 +99,22 @@ class Controller:
             pygame.display.flip()
             #self.screen.fill("black")
             self.player.collide(self.player.rect, self.enemy.rect)
-            if self.player.fight == True:
-                if self.player.attacking == True:
-                    if self.enemy.name == "RAT":
-                        if self.player.weapon == "CLAW":
-                            self.enemy.health = 5
-                        elif self.player.weapon == "SABER":
-                            self.enemy.health = 0
-                else:
-                    self.player.lives -= 1
+            # if self.player.fight == True:
+            #     if self.player.attacking == True:
+            #         if self.enemy.name == "RAT":
+            #             if self.player.weapon == "CLAW":
+            #                 self.enemy.health = 5
+            #             elif self.player.weapon == "SABER":
+            #                 self.enemy.health = 0
+            #     else:
+            #         self.player.lives -= 1
 
 
             for i in self.tileRects:
                 if self.player.levelcollide(i, self.player.rect):
                     print("working")
-        self.all_sprites.draw(self.screen)
-        pygame.display.flip()
-        clock.tick(60)
+            self.all_sprites.draw(self.screen)
+            pygame.display.flip()
 
     def create_level(self):
         """
@@ -282,9 +283,41 @@ class Controller:
     # def win(self):
     #     while self.state == "WIN":
     #
-    # def gameOver(self):
-    #     while self.state == "GAMEOVER":
+    def gameOver(self):
+        self.screen.fill("black")
+        while self.state == "GAMEOVER":
+            pygame.font.init()
+            font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
+            retry = font.render('Retry', True, (131, 139, 139))
+            exit = font.render('Exit', True, (131, 139, 139))
 
+            button_retry = pygame.Rect((25, 190), (150, 40))
+            button_exit = pygame.Rect((25, 350), (150, 40))
+
+            self.screen.blit(self.button, (25, 155))
+            self.screen.blit(self.button, (25, 350))
+
+            self.screen.blit(retry, (40, 200))
+            self.screen.blit(exit, (70, 350))
+
+            click = False
+            mx, my = pygame.mouse.get_pos()
+
+            for event in pygame.event.get():
+                event.type == pygame.mouse.get_pressed()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        click = True
+
+            if button_retry.collidepoint((mx, my)):
+                if click:
+                    self.state = "CHOICE"
+
+            if button_exit.collidepoint((mx, my)):
+                if click:
+                    self.exitGame()
+
+            pygame.display.update()
     def exitGame(self):
         """
         description: stops running program ("Exits game")
