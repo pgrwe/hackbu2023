@@ -64,3 +64,8 @@ class Player(pygame.sprite.Sprite):
           if self.direction == "L":
              self.lives -= 1
              self.rect.x += 3*self.speed
+
+
+    def levelcollide(self, level, player):
+        if pygame.Rect.colliderect(level, player):
+            self.rect.y -= 1

@@ -35,7 +35,7 @@ class Controller:
         self.imgSkyblock = pygame.image.load("assets/skyblock.png")
 
         pygame.key.set_repeat(10, 50)
-
+        self.tileRects = []
 
         self.buttonimg = pygame.image.load("assets/redButton.png")
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
@@ -92,6 +92,9 @@ class Controller:
             pygame.display.flip()
             #self.screen.fill("black")
             self.player.collide(self.player.rect, self.enemy.rect)
+            for i in self.tileRects:
+                if self.player.levelcollide(i, self.player.rect):
+                    print("working")
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
         clock.tick(60)
@@ -112,7 +115,6 @@ class Controller:
                     ['2','2','2','1','2','2','2','2','2','2','2'],
                     ['2','2','2','2','2','2','2','2','2','2','2']]
         tileSize = 90
-        self.tileRects = []
         for y in range(len(gameMap)):
             for x in range(len(gameMap[y])):
                 if gameMap[y][x] == "1":
