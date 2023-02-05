@@ -7,11 +7,14 @@ class Player(pygame.sprite.Sprite):
         args: None
         return: None
         """
+        self.imagepath = "assets/catval.png"
         pygame.sprite.Sprite.__init__(self)
+        
+        self.image = pygame.image.load(self.imagepath).convert_alpha()
         # self.image = pygame.image.load("assets/cat.png").convert_alpha()
         self.image = pygame.Surface([10,20])
         self.image.fill("white")
-
+        
         self.rect = self.image.get_rect()
         self.rect.x = 500
         self.rect.y = 350
@@ -29,16 +32,17 @@ class Player(pygame.sprite.Sprite):
         """
         if direction == "U":
           self.direction = "U"
-          # self.image = pygame.image.load("assets/cat.png")
+          self.image = pygame.image.load(self.imagepath)
           self.rect.y -= self.speed
         elif direction == "D":
           self.direction = "D"
+          self.image = pygame.image.load(self.imagepath)
           # self.image = pygame.image.load("assets/cat.png")
           self.rect.y += self.speed
         elif direction == "L":
           self.direction = "L"
           self.rect.x -= self.speed
-          # self.image = pygame.image.load("assets/cat.png")
+          self.image = pygame.image.load(self.imagepath)
         elif direction == "R":
           self.direction = "R"
           self.rect.x += self.speed
@@ -58,4 +62,5 @@ class Player(pygame.sprite.Sprite):
              self.lives -= 1
              self.rect.x += 3*self.speed
              
+
 
