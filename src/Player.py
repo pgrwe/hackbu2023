@@ -12,10 +12,6 @@ class Player(pygame.sprite.Sprite):
 
         self.img = pygame.image.load(self.imagepath).convert_alpha()
         self.image =pygame.transform.scale(self.img, (100, 100))
-        # self.image = pygame.image.load("assets/cat.png").convert_alpha()
-        # self.image = pygame.Surface([10,20])
-        # self.image.fill("white")
-
         self.rect = self.image.get_rect()
         self.rect.center = 500,350
         self.rect.x = 0
@@ -25,6 +21,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
         self.speed = 15
         self.lives = 9
+        self.attack_ani_R = [pygame.image.load("animationright"),pygame.image.load("animation two")]
+        self.attack_ani_L = [pygame.image.load(animationLEft), pygame.image.load("animation 2 left")]
+        self.attacking = False
+        self.attack_frame = 0
 
 
     def move(self, direction = None):
@@ -52,7 +52,24 @@ class Player(pygame.sprite.Sprite):
           # self.image = pygame.image.load("assets/cat.png")
 
     def attack(self):
-        
+        """
+        description: makes the character attack with an animation. also states how much damage it is able to do while also taking damage too.
+        args: none.
+        return: none.
+        """
+        if self.attack_frame > 1:
+            self.attack_frame = 0
+            self.attacking = False
+
+        if self.direction == "R":
+            self.image = self.attack_ani_R[self.attack_frame]
+        else:
+            self.image = self.attack_ani_L[self.attack_frame]
+
+        self.attack_frame += 1
+        if self.attacking == False:
+            self.move()
+
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
           if self.direction == "R":
