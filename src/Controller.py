@@ -189,43 +189,6 @@ class Controller:
             text = ""
             writing = True
             cha_choice = False
-
-
-        while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if input_box.collidepoint(event.pos):
-                        active = not active
-                    else:
-                        active = False
-                        color = color_active
-                    if active:
-                        color = color_active
-                    else:
-                        color = color_inactive
-                if event.type == pygame.KEYDOWN:
-                    if active:
-                        if event.key == pygame.K_BACKSPACE:
-                            text = text[:-1]
-                        elif event.key == pygame.K_RETURN:
-                            text = ""
-                            self.state == "GAME"
-                            self.screen.fill((0, 0, 0))
-                            done = True
-                        else:
-                            text += event.unicode
-                            self.player.name = text
-        color2 = (0,0,0)
-        txt_surface = font.render(text, True, color)
-        width = max(150, txt_surface.get_width() + 10)
-        input_box.w = width
-        pygame.draw.rect(self.screen, color2, inside_box)
-        self.screen.blit(txt_surface, (input_box.x + 5, input_box.y + 2))
-        pygame.draw.rect(self.screen, color , input_box, 2)
-        pygame.display.flip()
-
             while writing == True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -259,8 +222,6 @@ class Controller:
 
             while cha_choice == True:
                 print("HERE YOU CHOOSE YOUR CAT")
-                cha_choice = False
-                self.state = "GAME"
 
     # def collision(self):
     #     if  pygame.Rect.colliderect(self.player.rect, self.enemy.rect) == True:
