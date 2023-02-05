@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = 500,350
         self.rect.x = 0
-        self.rect.y = 0
+        self.rect.y = 400
         self.direction = "U"
         self.name = "Val"
         self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,50))
@@ -38,22 +38,22 @@ class Player(pygame.sprite.Sprite):
         return: None
         """
         if direction == "U":
-          self.direction = "U"
-          # self.image = pygame.image.load(self.image)
-          self.rect.y -= self.speed
+            self.direction = "U"
+        # self.image = pygame.image.load(self.image)
+            self.rect.y -= self.speed
         elif direction == "D":
-          self.direction = "D"
-          # self.image = pygame.image.load(self.image)
-          # self.image = pygame.image.load("assets/cat.png")
-          self.rect.y += self.speed
+            self.direction = "D"
+        # self.image = pygame.image.load(self.image)
+        # self.image = pygame.image.load("assets/cat.png")
+            self.rect.y += self.speed
         elif direction == "L":
-          self.direction = "L"
-          self.rect.x -= self.speed
-          # self.image = pygame.image.load(self.image)
+            self.direction = "L"
+            self.rect.x -= self.speed
+        # self.image = pygame.image.load(self.image)
         elif direction == "R":
-          self.direction = "R"
-          self.rect.x += self.speed
-          # self.image = pygame.image.load("assets/cat.png")
+            self.direction = "R"
+            self.rect.x += self.speed
+        # self.image = pygame.image.load("assets/cat.png")
 
     def attack(self):
         """

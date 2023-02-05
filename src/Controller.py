@@ -23,6 +23,9 @@ class Controller:
         self.cat1path = ("assets/catval.png")
         self.cat2path = ("assets/cat2.png")
         self.cat3path = ("assets/cat3.png")
+        self.catsoulpath = ("assets/catsoul.png")
+        self.heartpath  = ('assets/heart.png')
+        self.wintertreepath = ("assets/wintertree.png")
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
@@ -38,15 +41,19 @@ class Controller:
         self.tileRects = []
 
         self.buttonimg = pygame.image.load("assets/redButton.png")
-        self.button = pygame.transform.scale(self.buttonimg, (150, 150))
+        self.button = pygame.transform.scale(self.buttonimg, (150, 60))
         # self.screen.blit(self.player.image, self.player.rect)
 
         self.cat1_img = pygame.image.load(self.cat1path)
-        self.cat1 = pygame.transform.scale(self.cat1_img, (64, 64))
+        self.cat1 = pygame.transform.scale(self.cat1_img, (250, 250))
         self.cat2_img = pygame.image.load(self.cat2path)
-        self.cat2 = pygame.transform.scale(self.cat2_img, (64, 64))
+        self.cat2 = pygame.transform.scale(self.cat2_img, (250, 250))
         self.cat3_img = pygame.image.load(self.cat3path)
-        self.cat3 = pygame.transform.scale(self.cat3_img, (64, 64))
+        self.cat3 = pygame.transform.scale(self.cat3_img, (250, 250))
+        self.catsoul_img = pygame.image.load(self.catsoulpath)
+        self.catsoul = pygame.transform.scale(self.catsoul_img, (250, 250))
+        self.heart_img = pygame.image.load(self.heartpath)
+        self.heart = pygame.transform.scale(self.heart_img, (64, 64))
 
     def mainLoop(self):
         """
@@ -154,30 +161,39 @@ class Controller:
         return: None
         """
         while self.state == "TITLE":
+            self.screen.fill((255,141,133))
             pygame.font.init()
             font = pygame.font.Font("assets/Blantick_Script.ttf", 80)
-            title1 = font.render('Cat Valentine', True, (131, 139, 139))
-            title2 = font.render('Adventure', True, (131, 139, 139))
-            start = font.render('Start', True, (131, 139, 139))
-            exit = font.render('Exit', True, (131, 139, 139))
+            font2 = pygame.font.Font("assets/Blantick_Script.ttf", 55)
+            title1 = font.render('Cat Valentine', True, (250, 222, 220))
+            title2 = font.render('Adventure', True, (250, 222, 220))
+            start = font2.render('Start', True, (250, 222, 220))
+            exit = font2.render('Exit', True, (250, 222, 220))
 
-            button_start = pygame.Rect((25, 190), (150, 40))
-            button_exit = pygame.Rect((25, 350), (150, 40))
+            button_start = pygame.Rect((420, 250), (150, 60))
+            button_exit = pygame.Rect((420, 350), (150, 60))
 
-            self.screen.blit(title1, (20, 10))
-            self.screen.blit(title2, (40, 75))
+            self.screen.blit(title1, (330, 10))
+            self.screen.blit(title2, (380, 75))
 
-            self.screen.blit(self.button, (25, 155))
-            self.screen.blit(self.button, (25, 350))
+            self.screen.blit(self.button, (420, 250))
+            self.screen.blit(self.button, (420, 350))
 
-            self.screen.blit(start, (40, 200))
-            self.screen.blit(exit, (70, 350))
+            self.screen.blit(start, (450, 250))
+            self.screen.blit(exit, (450, 350))
+
+            self.screen.blit(self.cat1, (180, 450))
+            self.screen.blit(self.heart, (470, 575))
+            self.screen.blit(self.catsoul, (600, 450))
 
             click = False
             mx, my = pygame.mouse.get_pos()
 
             for event in pygame.event.get():
-                event.type == pygame.mouse.get_pressed()
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                # event.type == pygame.mouse.get_pressed()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         click = True
