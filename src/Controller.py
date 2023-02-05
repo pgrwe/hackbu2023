@@ -40,12 +40,13 @@ class Controller:
         pygame.key.set_repeat(10, 50)
         self.state = "TITLE"
 
-        self.player = Player.Player()
-        self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
-        self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
+        # self.player = Player.Player()
+        # self.enemy = Enemy.Enemy("Ghosty", 700, 350,)
+        # self.all_sprites = pygame.sprite.Group((self.player),(self.enemy))
 
         self.buttonimg = pygame.image.load("assets/redButton.png")
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
+        self.screen.blit(self.player.image, self.player.rect)
 
     def mainLoop(self):
         """
@@ -165,7 +166,7 @@ class Controller:
 
             if button_start.collidepoint((mx, my)):
                 if click:
-                    self.state = "GAME"
+                    self.state = "CHOICE"
 
             if button_exit.collidepoint((mx, my)):
                 if click:
@@ -179,19 +180,21 @@ class Controller:
         args: None
         return: None
         """
-        input_box = pygame.Rect((310, 10), (25, 28))
-        inside_box = pygame.Rect((313, 10), (200, 32))
-        font = pygame.font.Font('assets/Basking.ttf', 20)
-        color_inactive = pygame.Color('darkorchid4')
-        color_active = pygame.Color('darkorchid3')
-        color = color_inactive
-        text1 = font.render('Enter Name:', True, (154, 50, 205))
-        self.screen.blit(text1, (200, 10))
-        text = ""
-        active = False
-        done = False
-        pygame.display.update()
+        self.screen.fill("black")
+        while self.state == "CHOICE":
+            input_box = pygame.Rect((310, 10), (25, 28))
+            inside_box = pygame.Rect((313, 10), (500, 32))
+            font = pygame.font.Font('assets/Blantick_Script.ttf', 40)
+            color_inactive = pygame.Color('red')
+            color_active = pygame.Color('darkorchid3')
+            color = color_inactive
+            text1 = font.render('Enter Name:', True, (250, 0, 0))
+            self.screen.blit(text1, (100, 10))
+            text = ""
+            writing = True
+            cha_choice = False
 
+<<<<<<< HEAD
         while not done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -226,6 +229,43 @@ class Controller:
         self.screen.blit(txt_surface, (input_box.x + 5, input_box.y + 2))
         pygame.draw.rect(self.screen, color , input_box, 2)
         pygame.display.flip()
+=======
+            while writing == True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if input_box.collidepoint(event.pos):
+                            color = color_active
+                    if color == color_active:
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_BACKSPACE:
+                                text = text[:-1]
+                            elif event.key == pygame.K_RETURN:
+                                self.screen.fill((0, 0, 0))
+                                writing = False
+                            else:
+                                text += event.unicode
+                                self.player.name = text
+                                # print(self.player.name)
+                txt_surface = font.render(text, True, color)
+                width = max(150, txt_surface.get_width() + 10)
+                input_box.w = width
+                pygame.draw.rect(self.screen, (0,0,0), inside_box)
+                self.screen.blit(txt_surface, (input_box.x + 5, input_box.y - 5))
+                pygame.draw.rect(self.screen, color , input_box, 2)
+                # pygame.display.update()
+                pygame.display.flip()
+                if writing == False:
+                    cha_choice = True
+                    break
+
+            while cha_choice == True:
+                print("HERE YOU CHOOSE YOUR CAT")
+                cha_choice = False
+                self.state = "GAME"
+>>>>>>> 1f93769c2040099ad4b7f38a00a5b82bb04b91df
 
     # def collision(self):
     #     if  pygame.Rect.colliderect(self.player.rect, self.enemy.rect) == True:
