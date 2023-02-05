@@ -17,7 +17,6 @@ class Controller:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         self.background = pygame.Surface((self.window_width, self.window_height))
         pygame.display.set_caption("Cat Valentine Adventure")
-<<<<<<< HEAD
         pygame.key.set_repeat(10, 50) # movement speed repetition 
         self.state = "GAME" # game state
 
@@ -37,8 +36,6 @@ class Controller:
         
        
         #self.scrollval = 0
-        
-=======
         pygame.key.set_repeat(10, 50)
         self.state = "TITLE"
 
@@ -66,7 +63,6 @@ class Controller:
             #     self.win()
             # elif (self.state == "GAMEOVER"):
             #     self.gameOver()
->>>>>>> afe20e12107797c2d1e8e507190a41068b154561
 
     def gameLoop(self):
         """
@@ -92,11 +88,10 @@ class Controller:
                 self.create_level()
             self.all_sprites.draw(self.screen)
             pygame.display.flip()
-            self.screen.fill("black")
+            #self.screen.fill("black")
             self.player.collide(self.player.rect, self.enemy.rect)
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
-<<<<<<< HEAD
         clock.tick(60)
 
     def create_level(self):
@@ -128,18 +123,6 @@ class Controller:
                     self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
                 # if gameMap[x][y] != "0":
                     # self.tileRects.append(pygame.Rect(x*tileSize, y*tileSize))
-                
-                
-        
-        
-        
-        
-        
-        
-        
-        
-     
-=======
 
     def title(self):
         """
@@ -268,4 +251,3 @@ class Controller:
         pygame.quit()
         sys.exit()
         
->>>>>>> afe20e12107797c2d1e8e507190a41068b154561
