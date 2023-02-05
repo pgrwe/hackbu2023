@@ -82,29 +82,39 @@ class Player(pygame.sprite.Sprite):
             self.attack_frame = 0
             self.attacking = False
 
-        if self.direction == "R":
-            self.image = self.attack_ani_R[self.attack_frame]
-        else:
-            self.image = self.attack_ani_L[self.attack_frame]
 
+        if self.direction == "R":
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_R[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_R[self.attack_frame]
+        else:
+            if self.weapon == "CLAW":
+                self.image = self.attack_aniClaw_L[self.attack_frame]
+            elif self.weapon == "SABER":
+                self.image = self.attack_aniSaber_L[self.attack_frame]
         self.attack_frame += 1
+
         if self.attacking == False:
             self.move()
       
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
+          self.fight = True
           if self.direction == "R":
             #player loses a life
             self.lives -= 1
             self.rect.x -= 3*self.speed
-            print("Ouch")
+            print("Ouch", self.lives)
           if self.direction == "D":
              self.lives -= 1
              self.rect.x += 3*self.speed
              self.rect.y += self.speed
+             print("Ouch", self.lives)
           if self.direction == "L":
              self.lives -= 1
              self.rect.x += 3*self.speed
+             print("Ouch", self.lives)
 
 
     def levelcollide(self, level, player):

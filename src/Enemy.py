@@ -18,3 +18,13 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = pygame.Rect((self.rect.x, self.rect.y),(10,20))
         self.speed = 3
         self.name = "RAT"
+        self.health = 1
+
+    def update(self):
+        # """
+        # description: Kills the enemy if its health reaches 0 or is less than 0.
+        # args: None
+        # return: None
+        # """
+        if self.health <= 0:
+          self.kill()
