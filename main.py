@@ -4,6 +4,6 @@ import pygame
 def main():
     pygame.init()
     game = Controller.Controller()
-    game.gameLoop()
+    game.mainLoop()
 
 main()
