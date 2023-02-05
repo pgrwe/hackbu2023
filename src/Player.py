@@ -43,3 +43,19 @@ class Player(pygame.sprite.Sprite):
           self.direction = "R"
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
+    def collide(self, rect1, rect2):
+      if  pygame.Rect.colliderect(rect1, rect2) == True:
+          if self.direction == "R":
+            #player loses a life
+            self.lives -= 1
+            self.rect.x -= 3*self.speed
+            print("Ouch")
+          if self.direction == "D":
+             self.lives -= 1
+             self.rect.x += 3*self.speed
+             self.rect.y += self.speed
+          if self.direction == "L":
+             self.lives -= 1
+             self.rect.x += 3*self.speed
+             
+

@@ -68,6 +68,7 @@ class Controller:
             self.all_sprites.draw(self.screen)
             pygame.display.flip()
             self.screen.fill("black")
+            self.player.collide(self.player.rect, self.enemy.rect)
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
@@ -170,6 +171,17 @@ class Controller:
         pygame.draw.rect(self.screen, color , input_box, 2)
 
 
+    # def collision(self):
+    #     if  pygame.Rect.colliderect(self.player.rect, self.enemy.rect) == True:
+    #         #player loses a life
+    #         self.player.lives -= 1
+    #         self.rect.x -= 3*self.speed
+    #         print("Ouch")
+
+
+        
+
+
         pygame.display.flip()
     #
     # def win(self):
@@ -186,3 +198,4 @@ class Controller:
         """
         pygame.quit()
         sys.exit()
+        
