@@ -1,8 +1,8 @@
 import pygame, sys, os
 from src import Player
 from src import Enemy
+from src import Tiles
 from pygame import *
-# from src import CONSTANTS
 
 class Controller:
     def __init__(self):
@@ -99,8 +99,6 @@ class Controller:
                     elif (event.key == pygame.K_x):
                         self.player.attacking = True
                         self.player.attack()
-
-
                 self.player.move()
                 self.create_level()
                 self.all_sprites.draw(self.screen)
@@ -117,14 +115,15 @@ class Controller:
             #                 self.enemy.health = 0
             #     else:
             #         self.player.lives -= 1
-
-
             for i in self.tileRects:
                 if self.player.levelcollide(i, self.player.rect):
                     print("working")
-            self.create_level()
-            self.all_sprites.draw(self.screen)
-            pygame.display.flip()
+        self.all_sprites.draw(self.screen)
+        pygame.display.flip()
+        clock.tick(60)
+
+
+
 
     def create_level(self):
         """
@@ -141,22 +140,41 @@ class Controller:
                     ['1','1','3','0','4','1','1','2','2','2','2'],
                     ['2','2','2','1','2','2','2','2','2','2','2'],
                     ['2','2','2','2','2','2','2','2','2','2','2']]
+
+        gameMap2 =  ['0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','0','0','0','0',
+                    '0','0','0','0','0','0','0','4','1','1','1',
+                    '1','1','3','0','4','1','1','2','2','2','2',
+                    '2','2','2','1','2','2','2','2','2','2','2',
+                    '2','2','2','2','2','2','2','2','2','2','2']
         tileSize = 90
         for y in range(len(gameMap)):
             for x in range(len(gameMap[y])):
                 if gameMap[y][x] == "1":
-                    self.temp = self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
+                    self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "2":
-                    self.temp = self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
+                    self.temp2 = self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
+                    self.tileRects.append(pygame.Rect(self.temp2))
                 elif gameMap[y][x] == "3":
-                    self.temp = self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
+                    self.temp3 = self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
+                    self.tileRects.append(pygame.Rect(self.temp3))
                 elif gameMap[y][x] == "4":
-                    self.temp = self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
+                    self.temp4 = self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
+                    self.tileRects.append(pygame.Rect(self.temp4))
                 elif gameMap[y][x] == "0":
                     self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
-                if gameMap[y][x] != "0":
-                    self.tileRects.append(pygame.Rect(self.temp))
 
+        self.tileGroup = pygame.sprite.Group()
+        for row_index,row in enumerate(gameMap2):
+            for col_index,column in enumerate(row):
+                x = col_index * tileSize
+                y = row_index * tileSize
+                if column != '0':
+                    tile = Tiles.Tile((x,y), tileSize)
+                    self.tileGroup.add(tile)
     def title(self):
         """
         description: Sets up title screen with it text, buttons, and images.
