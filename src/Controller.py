@@ -74,6 +74,7 @@ class Controller:
         while self.state == "GAME":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print(self.temp)
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_UP):
@@ -115,17 +116,17 @@ class Controller:
         for y in range(len(gameMap)):
             for x in range(len(gameMap[y])):
                 if gameMap[y][x] == "1":
-                    self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
+                    self.temp = self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "2":
-                    self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
+                    self.temp = self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "3":
-                    self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
+                    self.temp = self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "4":
-                    self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
+                    self.temp = self.screen.blit(self.imgSnowLeftcorner, (x*tileSize, y*tileSize))
                 elif gameMap[y][x] == "0":
                     self.screen.blit(self.imgSkyblock, (x*tileSize, y*tileSize))
-                # if gameMap[x][y] != "0":
-                    # self.tileRects.append(pygame.Rect(x*tileSize, y*tileSize))
+                if gameMap[y][x] != "0":
+                    self.tileRects.append(pygame.Rect(self.temp))
 
     def title(self):
         """
@@ -224,7 +225,7 @@ class Controller:
         pygame.draw.rect(self.screen, color2, inside_box)
         self.screen.blit(txt_surface, (input_box.x + 5, input_box.y + 2))
         pygame.draw.rect(self.screen, color , input_box, 2)
-
+        pygame.display.flip()
 
     # def collision(self):
     #     if  pygame.Rect.colliderect(self.player.rect, self.enemy.rect) == True:
@@ -232,13 +233,6 @@ class Controller:
     #         self.player.lives -= 1
     #         self.rect.x -= 3*self.speed
     #         print("Ouch")
-
-
-        
-
-
-        pygame.display.flip()
-    #
     # def win(self):
     #     while self.state == "WIN":
     #
@@ -253,4 +247,10 @@ class Controller:
         """
         pygame.quit()
         sys.exit()
+        
+    def collision_test(rect, tiles):
+        hitlist = []
+        for tile in tiles:
+            if rect.colliderect(tile):
+                hitlist.append(tile)
         
