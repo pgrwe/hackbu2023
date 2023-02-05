@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         #self.rect.y = 440 #440 number where platform starts on right side
         self.direction = "U"
         self.name = "Val"
-        self.rect = pygame.Rect((self.rect.x,self.rect.y),(90,90))
+        self.rect = pygame.Rect((self.rect.x,self.rect.y),(50,90))
         self.speed = 15
         self.lives = 9
         self.y_vel = self.rect.y
