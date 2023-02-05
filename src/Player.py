@@ -50,6 +50,9 @@ class Player(pygame.sprite.Sprite):
           self.direction = "R"
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
+
+    def attack(self):
+        
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
           if self.direction == "R":

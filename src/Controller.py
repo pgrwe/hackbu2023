@@ -20,12 +20,12 @@ class Controller:
         pygame.key.set_repeat(10, 50) # movement speed repetition
         self.state = "TITLE" # game state
 
+        self.cat1path = ("assets/catval.png")
         self.cat2path = ("assets/cat2.png")
+        self.cat3path = ("assets/cat3.png")
 
         self.player = Player.Player() # init Player class from Player file
         self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
-        self.player.img = pygame.image.load(self.cat2path).convert_alpha()
-        self.player.image =pygame.transform.scale(self.player.img, (100, 100))
         self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
 
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
@@ -41,11 +41,11 @@ class Controller:
         self.button = pygame.transform.scale(self.buttonimg, (150, 150))
         # self.screen.blit(self.player.image, self.player.rect)
 
-        self.cat1_img = pygame.image.load("assets/catval.png")
+        self.cat1_img = pygame.image.load(self.cat1path)
         self.cat1 = pygame.transform.scale(self.cat1_img, (64, 64))
-        self.cat2_img = pygame.image.load("assets/catval.png")
+        self.cat2_img = pygame.image.load(self.cat2path)
         self.cat2 = pygame.transform.scale(self.cat2_img, (64, 64))
-        self.cat3_img = pygame.image.load("assets/catval.png")
+        self.cat3_img = pygame.image.load(self.cat3path)
         self.cat3 = pygame.transform.scale(self.cat3_img, (64, 64))
 
     def mainLoop(self):
@@ -250,10 +250,14 @@ class Controller:
 
                 if cat_2.collidepoint((mx, my)):
                     if click:
+                        self.player.img = pygame.image.load(self.cat2path).convert_alpha()
+                        self.player.image = pygame.transform.scale(self.player.img, (100, 100))
                         cha_choice = False
                         self.state = "GAME"
                 if cat_3.collidepoint((mx, my)):
                     if click:
+                        self.player.img = pygame.image.load(self.cat3path).convert_alpha()
+                        self.player.image = pygame.transform.scale(self.player.img, (100, 100))
                         cha_choice = False
                         self.state = "GAME"
                 pygame.display.update()
