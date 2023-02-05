@@ -87,21 +87,20 @@ class Player(pygame.sprite.Sprite):
         # if self.attacking == False:
             # self.move()
 
+        # if self.direction == "R":
+            # if self.weapon == "CLAW":
+                # self.image = self.attack_aniClaw_R[self.attack_frame]
+            # elif self.weapon == "SABER":
+                # self.image = self.attack_aniSaber_R[self.attack_frame]
+        # else:
+            # if self.weapon == "CLAW":
+                # self.image = self.attack_aniClaw_L[self.attack_frame]
+            # elif self.weapon == "SABER":
+                # self.image = self.attack_aniSaber_L[self.attack_frame]
+        # self.attack_frame += 1
 
-        if self.direction == "R":
-            if self.weapon == "CLAW":
-                self.image = self.attack_aniClaw_R[self.attack_frame]
-            elif self.weapon == "SABER":
-                self.image = self.attack_aniSaber_R[self.attack_frame]
-        else:
-            if self.weapon == "CLAW":
-                self.image = self.attack_aniClaw_L[self.attack_frame]
-            elif self.weapon == "SABER":
-                self.image = self.attack_aniSaber_L[self.attack_frame]
-        self.attack_frame += 1
-
-        if self.attacking == False:
-            self.move()
+        # if self.attacking == False:
+            # self.move()
       
     def collide(self, rect1, rect2):
       if  pygame.Rect.colliderect(rect1, rect2) == True:
