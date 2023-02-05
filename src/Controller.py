@@ -134,6 +134,7 @@ class Controller:
             self.screen.blit(text1, (100, 10))
             text = ""
             writing = True
+            cha_choice = False
 
             while writing == True:
                 for event in pygame.event.get():
@@ -163,7 +164,13 @@ class Controller:
                 # pygame.display.update()
                 pygame.display.flip()
                 if writing == False:
-                    self.state = "GAME"
+                    cha_choice = True
+                    break
+
+            while cha_choice == True:
+                print("HERE YOU CHOOSE YOUR CAT")
+                cha_choice = False
+                self.state = "GAME"
 
     #
     # def win(self):
