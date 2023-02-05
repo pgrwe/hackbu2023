@@ -58,10 +58,9 @@ class Player(pygame.sprite.Sprite):
         #self.rect.y += self.y_vel
 
         if direction == "U":
-            for i in range(200):
-                self.rect.y -= 0.05
-            for i in range(200):
-                self.rect.y += 0.5
+            self.rect.y -= 0.05
+            # for i in range(200):
+            #     self.rect.y += 0.5
 
         #self.rect.y += self.y_vel
 
@@ -78,7 +77,7 @@ class Player(pygame.sprite.Sprite):
           self.direction = "R"
           self.rect.x += self.speed
           # self.image = pygame.image.load("assets/cat.png")
-          
+
         elif direction == "grav":
             self.y_vel += .8
             if self.y_vel > 2:
@@ -144,4 +143,4 @@ class Player(pygame.sprite.Sprite):
     def levelcollide(self, level):
         for tile in level:
             if tile.colliderect(self.rect):
-                self.y_vel = 0		
+                self.y_vel = 0

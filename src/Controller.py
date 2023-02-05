@@ -29,7 +29,7 @@ class Controller:
         self.ratKingpath = ("assets/ratKing.png")
 
         self.player = Player.Player() # init Player class from Player file
-        self.enemy = Enemy.Enemy("RAT", 700, 350,) # init Enemy class from
+        self.enemy = Enemy.Enemy("RAT", 700, 300,) # init Enemy class from
         self.all_sprites = pygame.sprite.Group((self.player),(self.enemy)) # group of all sprites
 
         self.imgSnowmain = pygame.image.load("assets/cobbleSnowMainRoad.png").convert_alpha()
@@ -121,7 +121,7 @@ class Controller:
             #                 self.enemy.health = 0
             #     else:
             #         self.player.lives -= 1
-            
+
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
@@ -158,7 +158,7 @@ class Controller:
             for tile in row:
                 if tile == "1":
                     self.screen.blit(self.imgSnowmain, (x*tileSize, y*tileSize))
-                if tile == "2": 
+                if tile == "2":
                     self.screen.blit(self.imgSnowbedrock, (x*tileSize, y*tileSize))
                 if tile == "3":
                     self.screen.blit(self.imgSnowRightcorner, (x*tileSize, y*tileSize))
@@ -170,7 +170,7 @@ class Controller:
                     tempRect = pygame.Rect(x*tileSize, y*tileSize, tileSize, tileSize)
                     self.tileRects.append(tempRect)
                     # pygame.draw.rect(self.screen,(255,255,255),tempRect)
-                x+=1 
+                x+=1
             y+=1
 
         # self.tileGroup = pygame.sprite.Group()

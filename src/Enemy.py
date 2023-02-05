@@ -8,14 +8,15 @@ class Enemy(pygame.sprite.Sprite):
         return: None
         """
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("assets/ratKing.png").convert_alpha()
-        self.image = pygame.Surface([10,20])
-        self.image.fill("blue")
-
+        self.img = pygame.image.load("assets/ratKing.png").convert_alpha()
+        self.image =pygame.transform.scale(self.img, (150, 150))
+        # self.image = pygame.Surface([10,20])
+        # self.image.fill("blue")
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.rect = pygame.Rect((self.rect.x, self.rect.y),(10,20))
+        self.rect.center = (700,300)
+        # self.rect.x = x
+        # self.rect.y = y
+        self.rect = pygame.Rect((self.rect.x, self.rect.y),(100,100))
         self.speed = 3
         self.name = "RAT"
         self.health = 1
